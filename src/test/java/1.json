@@ -1,0 +1,23 @@
+[{
+  "type": {
+    "type": "1",
+    "desc_type": "分类描述"
+  },
+  "events": [
+    {
+      "_id": "572c5d2ee0087f57ae761b56",
+      "state": {
+        "type": "1",
+        "name": "状态"
+      },
+      "type": {},
+      "order": "2",
+      "image": {
+        "thumbnail": "http://weegotest.b0.upaiyun.com/brands/origin/setThumbnail.jpg",
+        "detail": "http://weegotest.b0.upaiyun.com/brands/origin/setDetail.jpg",
+        "sign_up": "http://weegotest.b0.upaiyun.com/brands/origin/setSignUp.jpg",
+        "partner": "http://weegotest.b0.upaiyun.com/brands/origin/setPartner.jpg"
+      }
+    }
+  ]
+}]
