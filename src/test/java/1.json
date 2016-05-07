@@ -1,23 +1,76 @@
 [{
   "type": {
     "type": "1",
-    "desc_type": "分类描述"
+    "desc_type": "五月 . 独一无二的超级福利 "
   },
   "events": [
     {
-      "_id": "572c5d2ee0087f57ae761b56",
+      "_id": "572c6b736d38f30d3500000e",
       "state": {
         "type": "1",
-        "name": "状态"
+        "name": "未上线"
       },
-      "type": {},
+      "order": "1",
+      "thumbnail_image": "http://weegotest.b0.upaiyun.com/brands/origin/572c6c2ec5584d0d35000002.jpeg",
+      "detail_image": "http://weegotest.b0.upaiyun.com/brands/origin/null",
+      "sign_up_image": "http://weegotest.b0.upaiyun.com/brands/origin/null",
+      "partner_image": "http://weegotest.b0.upaiyun.com/brands/origin/null"
+    },
+    {
+      "_id": "572c57143191be6812000001",
+      "state": {
+        "type": "2",
+        "name": "报名中"
+      },
+      "order": "4",
+      "thumbnail_image": "http://weegotest.b0.upaiyun.com/brands/origin/null",
+      "detail_image": "http://weegotest.b0.upaiyun.com/brands/origin/null",
+      "sign_up_image": "http://weegotest.b0.upaiyun.com/brands/origin/null",
+      "partner_image": "http://weegotest.b0.upaiyun.com/brands/origin/null"
+    }
+  ]
+},
+{
+  "type": {
+    "type": "2",
+    "desc_type": "六月 . 独一无二的超级福利"
+  },
+  "events": [
+    {
+      "_id": "572d26cee0087f23ef7457a1",
+      "state": {
+        "type": "2",
+        "name": "报名中"
+      },
+      "order": "1",
+      "thumbnail_image": "http://weegotest.b0.upaiyun.com/brands/origin/setThumbnail.jpg",
+      "detail_image": "http://weegotest.b0.upaiyun.com/brands/origin/setDetail.jpg",
+      "sign_up_image": "http://weegotest.b0.upaiyun.com/brands/origin/setSignUp.jpg",
+      "partner_image": "http://weegotest.b0.upaiyun.com/brands/origin/setPartner.jpg"
+    },
+    {
+      "_id": "572d26fee0087f245a73247e",
+      "state": {
+        "type": "2",
+        "name": "报名中"
+      },
+      "order": "1",
+      "thumbnail_image": "http://weegotest.b0.upaiyun.com/brands/origin/setThumbnail.jpg",
+      "detail_image": "http://weegotest.b0.upaiyun.com/brands/origin/setDetail.jpg",
+      "sign_up_image": "http://weegotest.b0.upaiyun.com/brands/origin/setSignUp.jpg",
+      "partner_image": "http://weegotest.b0.upaiyun.com/brands/origin/setPartner.jpg"
+    },
+    {
+      "_id": "572d2771e0087f2518686176",
+      "state": {
+        "type": "2",
+        "name": "报名中"
+      },
       "order": "2",
-      "image": {
-        "thumbnail": "http://weegotest.b0.upaiyun.com/brands/origin/setThumbnail.jpg",
-        "detail": "http://weegotest.b0.upaiyun.com/brands/origin/setDetail.jpg",
-        "sign_up": "http://weegotest.b0.upaiyun.com/brands/origin/setSignUp.jpg",
-        "partner": "http://weegotest.b0.upaiyun.com/brands/origin/setPartner.jpg"
-      }
+      "thumbnail_image": "http://weegotest.b0.upaiyun.com/brands/origin/setThumbnail.jpg",
+      "detail_image": "http://weegotest.b0.upaiyun.com/brands/origin/setDetail.jpg",
+      "sign_up_image": "http://weegotest.b0.upaiyun.com/brands/origin/setSignUp.jpg",
+      "partner_image": "http://weegotest.b0.upaiyun.com/brands/origin/setPartner.jpg"
     }
   ]
 }]

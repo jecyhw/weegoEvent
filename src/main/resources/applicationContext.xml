@@ -26,23 +26,39 @@
         </property>
     </bean>
 
+    <!-- JSON适配器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- JSON视图 -->
+    <bean id="jsonMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+
     <!-- jsp视图 -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
-        <property name="prefix" value="/WEB-INF/views/html/"/>
+        <property name="prefix" value="/views/html/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
     <!-- JSP资源路径 -->
+    <mvc:resources mapping="/resource/**" location="/views/resource/"/>
+    <mvc:resources mapping="/js/**" location="/views/js/"/>
+    <mvc:resources mapping="/css/**" location="/views/css/"/>
 
-    <mvc:resources mapping="/resource/**" location="/WEB-INF/views/resource/"/>
-    <mvc:resources mapping="/js/**" location="/WEB-INF/views/js/"/>
-    <mvc:resources mapping="/css/**" location="/WEB-INF/views/css/"/>
+    <mvc:resources mapping="/views/resource/**" location="/views/resource/"/>
+    <mvc:resources mapping="/views/js/**" location="/views/js/"/>
+    <mvc:resources mapping="/views/css/**" location="/views/css/"/>
 
-    <mvc:resources mapping="/event/resource/**" location="/WEB-INF/views/resource/"/>
-    <mvc:resources mapping="/event/js/**" location="/WEB-INF/views/js/"/>
-    <mvc:resources mapping="/event/css/**" location="/WEB-INF/views/css/"/>
+    <mvc:resources mapping="/event/resource/**" location="/views/resource/"/>
+    <mvc:resources mapping="/event/js/**" location="/views/js/"/>
+    <mvc:resources mapping="/event/css/**" location="/views/css/"/>
 
     <bean id="mongodb" class="me.weego.dao.Mongo" init-method="init" destroy-method="destroy">
         <property name="db" value="${mongodb.db}"/>

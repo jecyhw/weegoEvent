@@ -34,6 +34,11 @@ public class EventDao {
 
     public ModelAndView query() {
         List<Document> documents = new ArrayList<Document>();
+
+        //按order排序
+        documents.add(new Document("$sort", new Document("order", 1)));
+
+        //需要返回的字段
         Document showField = new Document("_id", "$_id")
                 .append("order", "$order")
                 .append("state", "$state")
@@ -41,19 +46,16 @@ public class EventDao {
                 .append("detail_image", "$detail_image")
                 .append("sign_up_image", "$sign_up_image")
                 .append("partner_image", "$partner_image");
-
+        //按照分类type进行分组
         Document subGroup = new Document("_id", "$type")
                 .append("type", new Document("$first", "$type"))
                 .append("desc_type", new Document("$first", "$desc_type"))
                 .append("events", new Document("$push", showField));
 
         Document group = new Document("$group", subGroup);
-
         documents.add(group);
 
-        Document sort = new Document("$sort", new Document("type", 1).append("order", 1));
-
-        documents.add(sort);
+        documents.add(new Document("$sort", new Document("type", 1)));
 
         final List<EventQuery> queries = new ArrayList<EventQuery>();
         collection.aggregate(documents).forEach(new Block<Document>() {
@@ -66,7 +68,6 @@ public class EventDao {
 
         ModelAndView modelAndView = new ModelAndView("newshare");
         modelAndView.addObject("eventList", queries);
-        modelAndView.addObject("test", "eeee");
         System.out.println(modelAndView);
         return modelAndView;
     }
@@ -87,16 +88,16 @@ public class EventDao {
         image.setThumbnail("setThumbnail.jpg");
         event.setImage(image);
 
-        event.setOrder("2");
+        event.setOrder("4");
 
         Event.State state = new Event.State();
-        state.setType("1");
-        state.setName("状态");
+        state.setType("2");
+        state.setName("报名中");
         event.setState(state);
 
         Event.Type type = new Event.Type();
-        type.setType("1");
-        type.setDesc("分类描述");
+        type.setType("2");
+        type.setDesc("六月 . 独一无二的超级福利");
         event.setType(type);
 
         Event.Time time = new Event.Time();
@@ -104,7 +105,7 @@ public class EventDao {
         time.setActive("2016-06-02");
         event.setTime(time);
 
-        MongoClient mongoClient = new MongoClient("localhost");
+        MongoClient mongoClient = new MongoClient("123.56.65.17");
         MongoCollection<Document> collection = mongoClient.getDatabase("travel1").getCollection("events");
         collection.insertOne(event.modelToDocument());
 
@@ -136,6 +137,8 @@ public class EventDao {
                 queries.add(new EventQuery().documentToModel(doc, EventQuery.class));
             }
         });
-        System.out.println(queries.get(0).modelToDocument(true).toJson());
+        for (EventQuery eventQuery : queries) {
+            System.out.println(eventQuery.modelToDocument(true).toJson());
+        }
     }
 }

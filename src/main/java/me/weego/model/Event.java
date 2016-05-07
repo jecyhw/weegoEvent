@@ -109,7 +109,6 @@ public class Event extends Model{
             doc.put("state", this.state.modelToDocument());
         }
         if (this.type != null) {
-            doc.put("type", this.type.modelToDocument());
             this.type.modelToDocument(doc);
         }
         if (this.order != null) {
@@ -119,7 +118,7 @@ public class Event extends Model{
             doc.put("time", this.time.modelToDocument());
         }
         if (this.image != null) {
-            doc.put("image", this.image.modelToDocument());
+            this.image.modelToDocument(doc);
         }
     }
 
@@ -214,7 +213,7 @@ public class Event extends Model{
                 doc.put("type", this.type);
             }
             if (this.desc != null) {
-                doc.put("desc", this.desc);
+                doc.put("desc_type", this.desc);
             }
         }
 
@@ -318,16 +317,16 @@ public class Event extends Model{
         @Override
         public void modelToDocument(Document doc, boolean flag) {
             if (this.thumbnail != null) {
-                doc.put("thumbnail", removeImageUrlPrefix(this.thumbnail));
+                doc.put(addImageSuffix("thumbnail"), removeImageUrlPrefix(this.thumbnail));
             }
             if (this.detail != null) {
-                doc.put("detail", removeImageUrlPrefix(this.detail));
+                doc.put(addImageSuffix("detail"), removeImageUrlPrefix(this.detail));
             }
             if (this.signUp != null) {
-                doc.put("sign_up", removeImageUrlPrefix(this.signUp));
+                doc.put(addImageSuffix("sign_up"), removeImageUrlPrefix(this.signUp));
             }
             if (this.partner != null) {
-                doc.put("partner", removeImageUrlPrefix(this.partner));
+                doc.put(addImageSuffix("partner"), removeImageUrlPrefix(this.partner));
             }
         }
 
