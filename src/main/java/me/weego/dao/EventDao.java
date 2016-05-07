@@ -2,11 +2,15 @@ package me.weego.dao;
 
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import me.weego.model.City;
 import me.weego.model.Event;
+import me.weego.model.EventParticipant;
 import me.weego.model.EventQuery;
+import me.weego.pojo.ResBody;
 import me.weego.util.LoggerUtil;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
@@ -15,7 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.eq;
 
 /**
  * @author tcl
@@ -72,6 +79,27 @@ public class EventDao {
         return modelAndView;
     }
 
+    public ResBody join(String id, String weixin) {
+        if (collection.find(eq("_id", new ObjectId(id))).first() == null) {
+            return ResBody.returnFail(-1, "活动不存在");
+        }
+
+        MongoCollection<Document> coll = mongo.getCollection("event_participants");
+        if (coll.find(eq("weixin", weixin)).first() != null) {
+            return ResBody.returnFail(-1, "已经报名");
+        }
+        EventParticipant eventParticipant = new EventParticipant();
+        eventParticipant.setWeixin(weixin);
+        eventParticipant.setDate(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+
+        Event event = new Event();
+        event.setId(new ObjectId(id));
+        eventParticipant.setEvent(event);
+
+        coll.insertOne(eventParticipant.modelToDocument());
+        return ResBody.returnSuccess(null);
+    }
+
     static public void main(String[] args) {
         Event event = new Event();
         event.setName("活动");
@@ -107,7 +135,12 @@ public class EventDao {
 
         MongoClient mongoClient = new MongoClient("123.56.65.17");
         MongoCollection<Document> collection = mongoClient.getDatabase("travel1").getCollection("events");
-        collection.insertOne(event.modelToDocument());
+
+        if (collection.find(eq("_id", new ObjectId("572d2884e0087f2674bf035f"))).first() != null) {
+            System.out.println("hello");
+        }
+
+        //collection.insertOne(event.modelToDocument());
 
         List<Document> documents = new ArrayList<Document>();
         Document showField = new Document("_id", "$_id")
@@ -138,7 +171,7 @@ public class EventDao {
             }
         });
         for (EventQuery eventQuery : queries) {
-            System.out.println(eventQuery.modelToDocument(true).toJson());
+            //System.out.println(eventQuery.modelToDocument(true).toJson());
         }
     }
 }
