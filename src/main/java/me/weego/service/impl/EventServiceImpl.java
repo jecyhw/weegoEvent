@@ -25,6 +25,10 @@ public class EventServiceImpl implements EventService {
         return eventDao.query();
     }
 
+    public ModelAndView detail(String id) {
+        return eventDao.detail(id);
+    }
+
     public ResBody join(String id, String weixin) {
         checkArgument(StringUtils.isNotBlank(id), "param id should not blank");
         checkArgument(StringUtils.isNotBlank(weixin), "param weixin should not blank");

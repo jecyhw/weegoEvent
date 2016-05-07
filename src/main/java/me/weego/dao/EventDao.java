@@ -49,10 +49,8 @@ public class EventDao {
         Document showField = new Document("_id", "$_id")
                 .append("order", "$order")
                 .append("state", "$state")
-                .append("thumbnail_image", "$thumbnail_image")
-                .append("detail_image", "$detail_image")
-                .append("sign_up_image", "$sign_up_image")
-                .append("partner_image", "$partner_image");
+                .append("thumbnail_image", "$thumbnail_image");
+
         //按照分类type进行分组
         Document subGroup = new Document("_id", "$type")
                 .append("type", new Document("$first", "$type"))
@@ -75,7 +73,14 @@ public class EventDao {
 
         ModelAndView modelAndView = new ModelAndView("newshare");
         modelAndView.addObject("eventList", queries);
-        System.out.println(modelAndView);
+        return modelAndView;
+    }
+
+    public ModelAndView detail(String id) {
+        Event event = new Event();
+        event.documentToModel(collection.find(eq("_id", new ObjectId(id))).first());
+        ModelAndView modelAndView = new ModelAndView("share_detail");
+        modelAndView.addObject("event", event);
         return modelAndView;
     }
 
@@ -149,7 +154,8 @@ public class EventDao {
                 .append("thumbnail_image", "$thumbnail_image")
                 .append("detail_image", "$detail_image")
                 .append("sign_up_image", "$sign_up_image")
-                .append("partner_image", "$partner_image");
+                .append("partner_image", "$partner_image")
+                .append("name", "$name");
 
         Document subGroup = new Document("_id", "$type")
                 .append("type", new Document("$first", "$type"))
@@ -171,7 +177,7 @@ public class EventDao {
             }
         });
         for (EventQuery eventQuery : queries) {
-            //System.out.println(eventQuery.modelToDocument(true).toJson());
+            System.out.println(eventQuery.modelToDocument(true).toJson());
         }
     }
 }

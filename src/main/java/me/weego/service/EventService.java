@@ -13,5 +13,6 @@ import java.util.List;
  */
 public interface EventService {
     ModelAndView query();
+    ModelAndView detail(String id);
     ResBody join(String id, String weixin);
 }

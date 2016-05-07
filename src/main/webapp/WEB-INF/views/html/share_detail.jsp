@@ -7,25 +7,25 @@
     <meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
     <link rel="stylesheet" type="text/css" href="../css/share_detail.css">
     <script type="text/javascript" src="../resource/jquery-1.3.2.min.js"></script>
-    <title>活动详情</title>
+    <title>${event.name}</title>
 </head>
 <body>
-<img class="top" src="${detail}"><!-- 顶图 -->
+<img class="top" src="${event.image.detail}"><!-- 顶图 -->
 <div class="content">
-    <img class="detail" src="${sign_up}"><!-- 报名图 -->
+    <img class="detail" src="${event.image.signUp}"><!-- 报名图 -->
     <div class="text">
         <img src="../resource/img/share/sign.png">
         <div class="name">
-            <form action="/event/join" method="post">
+            <form action="join" method="post">
                 <input class="nameWei" type="text" name="weixin"/>
-                <input type="hidden" value="${id}" name="id"/>
-                <input type="hidden" value="${type}" name="type"/>
+                <input type="hidden" value="${event.id}" name="id"/>
+                <input type="hidden" value="${event.type.type}" name="type"/>
                 <button class="canjia" type="submit"></button>
             </form>
         </div>
     </div>
-    <c:if test="${partner != null && partner != ''}">
-        <img class="partner" src="${partner}"><!-- 合作伙伴图 -->
+    <c:if test="${event.image.partner != null && event.image.partner != ''}">
+        <img class="partner" src="${event.image.partner}"><!-- 合作伙伴图 -->
     </c:if>
     <img class="ending" src="../resource/img/share/ending_d.png">
 </div>

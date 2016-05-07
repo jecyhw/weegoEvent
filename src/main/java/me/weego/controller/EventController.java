@@ -23,14 +23,8 @@ public class EventController extends BaseController {
     }
 
     @RequestMapping(value = "detail", method = RequestMethod.GET)
-    public ModelAndView detail(@RequestParam String id, @RequestParam String detail, @RequestParam("sign_up") String signUp, @RequestParam String partner, @RequestParam String type) {
-        ModelAndView modelAndView = new ModelAndView("share_detail");
-        modelAndView.addObject("id", id);
-        modelAndView.addObject("detail", detail);
-        modelAndView.addObject("sign_up", signUp);
-        modelAndView.addObject("partner", partner);
-        modelAndView.addObject("type", type);
-        return modelAndView;
+    public ModelAndView detail(@RequestParam String id) {
+        return eventService.detail(id);
     }
 
     @RequestMapping(value = "join", method = RequestMethod.POST)
