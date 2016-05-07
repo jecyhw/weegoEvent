@@ -87,7 +87,7 @@
         oninit: function(){
             //返回时，需告诉我们此时为返回动作而不是刷新，可以通过 hash 告诉我们
             //PageSlider 所有回调接口 this 指向 PageSlider，方便进行操作
-            if(true){
+            if(this.lastVisitedIndex){
                 this.moveTo(this.lastVisitedIndex, true);
             }
         }
@@ -107,7 +107,7 @@
             rtn[i].addEventListener('touchstart',function(){
                 $(".return").attr("src","../resource/img/share/returned.png")
             },false);
-        };
+        }
     }
 </script>
 </body>

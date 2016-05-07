@@ -150,7 +150,7 @@ body,html{
 }
 .page02 .content{
     width: 100%;
-    margin: 25px 50px 0 28px;
+    margin: 25px  0 50px 28px;
     position: relative;
 }
 .page02 .content .title{
@@ -221,7 +221,7 @@ body,html{
     left: -10px;
     background-image: url(../resource/img/share/join.png);
     width: 120px;
-    height: 40px;
+    height: 45px;
     background-size: cover;
 }
 .page02 .join:active{
