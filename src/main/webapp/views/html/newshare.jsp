@@ -41,7 +41,7 @@
                                         <c:out value="${dataEvent.type.desc}"/>
 									</div>	<!-- title -->
 								</div>
-								<!-- 循环content -->
+								<!-- 循环events -->
 								<c:forEach items="${dataEvent.events}" var="event">
                                     <c:set var="image" value="${event.image}"/>
 									<div class="pic">
@@ -50,10 +50,16 @@
 										<img class="aty" src="${image.thumbnail}"><!-- 活动图片 -->
 										<!-- if判断状态 显示不同状态的报名图片-->
                                         <c:choose>
-                                            <c:when test="${event.state.name=='报名中'}">
-                                                <img class="btn" src="../resource/img/share/join.png">
+                                            <c:when test="${event.state.name == '报名中'}">
+                                                < img class="btn" src="../resource/img/share/join.png">
                                                 <a class="button clearfix" href="share_detail.jsp?id=${event.id}&detail=${image.detail}&sign_up=${image.signUp}&partner=${image.partner}"><!-- 参数 -->
-                                                </a>
+                                                </a >
+                                            </c:when>
+                                            <c:when test="${event.state.name == '未开始'}">
+                                                < img class="next" src="../resource/img/share/next.png">
+                                            </c:when>
+                                            <c:when test="${event.state.name == '往期回顾'}">
+                                                < img class="btn return" src="../resource/img/share/return.png">
                                             </c:when>
                                         </c:choose>
 									</div>
