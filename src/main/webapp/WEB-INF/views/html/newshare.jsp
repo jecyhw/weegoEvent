@@ -54,7 +54,7 @@
                                         <!-- if判断状态 显示不同状态的报名图片-->
                                         <c:choose>
                                             <c:when test="${event.state.type == '2' || event.state.type == '3'}">
-                                                <a href="/event/detail?id=${event.id}&detail=${image.detail}&sign_up=${image.signUp}&partner=${image.partner}&type=${event.state.type}"><!-- 参数 -->
+                                                <a href="/event/detail?id=${event.id}&detail=${image.detail}&sign_up=${image.signUp}&partner=${empty image.partner ? '' : image.partner}&type=${event.state.type}"><!-- 参数 -->
                                                     <div class="btn join">
                                                     </div>
                                                 </a>

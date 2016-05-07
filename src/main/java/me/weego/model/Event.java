@@ -343,6 +343,9 @@ public class Event extends Model{
         static final String urlPrefix = "http://weegotest.b0.upaiyun.com/brands/origin/";
 
         private String addImageUrlPrefix(String image) {
+            if (image == null) {
+                return image;
+            }
             return urlPrefix + image;
         }
 
