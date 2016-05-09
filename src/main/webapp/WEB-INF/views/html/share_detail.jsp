@@ -48,14 +48,14 @@
         })
         $(".canjia").click(function () {
             if ($("input[name='type']").val() != '2') {
-                $(".share").addClass("show");
+                alert("报名已经截止");
             } else {
                 $.post("/event/join", {
                     id: $("input[name='id']").val(),
                     weixin: $("input[name='weixin']").val()
                 }, function (data) {
                    if (data.code == '0') {
-                       alert("报名成功");
+                       $(".share").addClass("show");
                    } else {
                        alert(data.msg);
                    }
