@@ -30,6 +30,9 @@
     <img class="ending" src="../resource/img/share/ending_d.png">
     <img class="share"  src="../resource/img/share/share.png">
 </div>
+<script id="DS_PRE_JS" type="text/javascript"
+        src="http://cdn.datastory.com.cn/js/pre-ds-min.js?dsTid=b59d5cd1-2f48-4c76-8868-4f27ab46cb11">
+</script>
 <script>
     window.onload = function(){
         var doma=$(".canjia");
@@ -41,7 +44,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $(".share").click(function (){
-            $(".share").addClass("show");
+            $(".share").removeClass("show");
         })
         $(".canjia").click(function () {
             if ($("input[name='type']").val() != '2') {
@@ -62,8 +65,6 @@
         });
     });
 </script>
-<script id="DS_PRE_JS" type="text/javascript"
-        src="http://cdn.datastory.com.cn/js/pre-ds-min.js?dsTid=b59d5cd1-2f48-4c76-8868-4f27ab46cb11">
-</script>
+
 </body>
 </html>

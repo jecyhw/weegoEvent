@@ -100,7 +100,6 @@
         var rtn=$(".return");
         for(var i=0;i<rtn.length;i++){
             rtn[i].addEventListener('touchstart',function(){
-                $(".return").attr("src","../resource/img/share/returned.png")
             },false);
         }
     }
