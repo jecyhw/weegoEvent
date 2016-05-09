@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/weegoCMS.iml" filepath="$PROJECT_DIR$/weegoCMS.iml" />
-      <module fileurl="file://$PROJECT_DIR$/wexin/wexin.iml" filepath="$PROJECT_DIR$/wexin/wexin.iml" />
     </modules>
   </component>
 </project>

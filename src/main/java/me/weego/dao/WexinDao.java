@@ -24,9 +24,10 @@ public class WexinDao {
         if (doc == null) {
 
         }
+        return null;
     }
 
     public String getJsapiTicket() {
-
+        return null;
     }
 }
