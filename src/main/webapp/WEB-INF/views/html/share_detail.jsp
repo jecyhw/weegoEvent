@@ -20,7 +20,7 @@
                 <input class="nameWei" type="text" name="weixin"/>
                 <input type="hidden" value="${event.id}" name="id"/>
                 <input type="hidden" value="${event.type.type}" name="type"/>
-                <button class="canjia" type="submit"></button>
+                <img class="canjia" src="../resource/img/share/submit.png">
             </form>
         </div>
     </div>
@@ -28,6 +28,7 @@
         <img class="partner" src="${event.image.partner}"><!-- 合作伙伴图 -->
     </c:if>
     <img class="ending" src="../resource/img/share/ending_d.png">
+    <img class="share"  src="../resource/img/share/share.png">
 </div>
 <script>
     window.onload = function(){
@@ -39,9 +40,12 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("button[type='submit']").click(function () {
+        $(".share").click(function (){
+            $(".share").addClass("show");
+        })
+        $(".canjia").click(function () {
             if ($("input[name='type']").val() != '2') {
-                alert("报名已经截止");
+                $(".share").addClass("show");
             } else {
                 $.post("/event/join", {
                     id: $("input[name='id']").val(),
