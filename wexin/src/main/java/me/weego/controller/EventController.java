@@ -2,7 +2,6 @@ package me.weego.controller;
 
 import me.weego.pojo.ResBody;
 import me.weego.service.EventService;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;

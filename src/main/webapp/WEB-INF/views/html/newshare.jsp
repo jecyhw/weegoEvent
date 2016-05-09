@@ -10,7 +10,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta name="format-detection" content="telephone=no, email=no">
     <link rel="stylesheet" href="../css/style.css"/>
-    <title>活动分享页面</title>
+    <title>我在参加Weego全球限量活动，价值百万的福利你值得拥有！</title>
 </head>
 <body>
 <div class="page-wrap">
@@ -35,21 +35,16 @@
 
                         <div class="content">
                             <div class="title">
-                                <img class="title_p" src="../resource/img/share/title_m.png">
-                                <div class="text">
-                                    <c:out value="${dataEvent.type.desc}"/>
-                                </div>	<!-- title -->
+                                <c:out value="${dataEvent.type.desc}"/>
                             </div>
                             <c:set var="number" value="1" ></c:set>
                             <!-- 循环events -->
                             <c:forEach items="${dataEvent.events}" var="event">
                                 <c:if test="${event.state.type != '1'}">
                                     <c:set var="image" value="${event.image}"/>
-
                                     <div class="pic">
                                         <div class="number">${number}</div><!-- 编号 -->
                                         <c:set var="number" value="${number + 1}"/>
-                                        <img class="circle" src="../resource/img/share/circle.png">
                                         <img class="aty" src="${image.thumbnail}"><!-- 活动图片 -->
                                         <!-- if判断状态 显示不同状态的报名图片-->
                                         <c:choose>
@@ -63,7 +58,8 @@
                                                 <img class="next" src="../resource/img/share/next.png">
                                             </c:when>
                                             <c:when test="${event.state.type == '5'}">
-                                                <img class="btn return" src="../resource/img/share/return.png">
+                                                <div class="btn return">
+                                                </div>
                                             </c:when>
                                         </c:choose>
                                     </div>
@@ -77,7 +73,6 @@
         </div>
     </div>
 </div>
-
 <script src="../resource/slider/zepto_modify.js"></script>
 <script src="../resource/slider/PageSlider.js"></script>
 <script>
