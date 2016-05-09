@@ -50,7 +50,7 @@
             if ($("input[name='type']").val() != '2') {
                 alert("报名已经截止");
             } else {
-                $.post("/event/join", {
+                $.post("join", {
                     id: $("input[name='id']").val(),
                     weixin: $("input[name='weixin']").val()
                 }, function (data) {

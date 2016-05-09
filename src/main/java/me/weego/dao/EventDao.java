@@ -87,8 +87,8 @@ public class EventDao {
         }
 
         MongoCollection<Document> coll = mongo.getCollection("event_participants");
-        if (coll.find(and(eq("weixin", weixin), eq("_id", new ObjectId(id)))).first() != null) {
-            return ResBody.returnFail(-1, "活动已经报名");
+        if (coll.find(and(eq("weixin", weixin), eq("event._id", id))).first() != null) {
+            return ResBody.returnFail(-1, "该活动您已经报名");
         }
         EventParticipant eventParticipant = new EventParticipant();
         eventParticipant.setWeixin(weixin);
