@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true"/>
-    <context:component-scan base-package="me.me.weego"/>
+    <context:component-scan base-package="me.weego"/>
 
     <context:annotation-config/>
 
@@ -56,7 +56,7 @@
     <mvc:resources mapping="/event/js/**" location="/WEB-INF/views/js/"/>
     <mvc:resources mapping="/event/css/**" location="/WEB-INF/views/css/"/>
 
-    <bean id="mongodb" class="me.me.weego.dao.Mongo" init-method="init" destroy-method="destroy">
+    <bean id="mongodb" class="me.weego.dao.Mongo" init-method="init" destroy-method="destroy">
         <property name="db" value="${mongodb.db}"/>
         <property name="server" value="${mongodb.url}"/>
     </bean>

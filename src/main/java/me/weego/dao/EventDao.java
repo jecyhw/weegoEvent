@@ -146,7 +146,7 @@ public class EventDao {
 
         List<Document> documents = new ArrayList<Document>();
         //过滤type等于1(未上线)的活动
-        documents.add(new Document("$match", ne("state.type", "1")));
+        documents.add(new Document("$match", new Document("state.type", new Document("$ne", "1"))));
 
         //按order排序
         documents.add(new Document("$sort", new Document("order", 1)));

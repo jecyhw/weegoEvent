@@ -19,7 +19,7 @@
             <form action="join" method="post">
                 <input class="nameWei" type="text" name="weixin"/>
                 <input type="hidden" value="${event.id}" name="id"/>
-                <input type="hidden" value="${event.type.type}" name="type"/>
+                <input type="hidden" value="${event.state.type}" name="type"/>
                 <img class="canjia" src="../resource/img/share/submit.png">
             </form>
         </div>

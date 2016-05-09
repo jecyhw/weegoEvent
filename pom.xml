@@ -226,6 +226,13 @@
             <groupId>javax.servlet.jsp.jstl</groupId>
             <artifactId>javax.servlet.jsp.jstl-api</artifactId>
         </dependency>
+
+        <!--http-->
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>weegoCMS</finalName>
