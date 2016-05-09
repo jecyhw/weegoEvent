@@ -12,7 +12,7 @@ import java.util.List;
  * @author tcl
  */
 public interface EventService {
-    ModelAndView query();
+    ModelAndView list();
     ModelAndView detail(String id);
     ResBody join(String id, String weixin);
 }

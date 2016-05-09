@@ -11,15 +11,15 @@ import javax.annotation.Resource;
  * @author tcl
  */
 @RestController()
-@RequestMapping("/event")
+@RequestMapping("/event/v1")
 public class EventController extends BaseController {
     @Resource
     private EventService eventService;
 
-    @RequestMapping(value = "query", method = RequestMethod.GET)
+    @RequestMapping(value = "list", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView query() {
-        return eventService.query();
+    public ModelAndView list() {
+        return eventService.list();
     }
 
     @RequestMapping(value = "detail", method = RequestMethod.GET)

@@ -2,7 +2,6 @@ package me.weego.dao;
 
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import me.weego.model.City;
 import me.weego.model.Event;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
 
 /**
  * @author tcl
@@ -39,8 +38,11 @@ public class EventDao {
     }
 
 
-    public ModelAndView query() {
+    public List<EventQuery> list() {
         List<Document> documents = new ArrayList<Document>();
+
+        //过滤type等于1(未上线)的活动
+        documents.add(new Document("$match", new Document("state.type", new Document("$ne", "1"))));
 
         //按order排序
         documents.add(new Document("$sort", new Document("order", 1)));
@@ -70,18 +72,13 @@ public class EventDao {
         });
 
         LoggerUtil.logBiz("query", queries);
-
-        ModelAndView modelAndView = new ModelAndView("newshare");
-        modelAndView.addObject("eventList", queries);
-        return modelAndView;
+        return queries;
     }
 
-    public ModelAndView detail(String id) {
+    public Event detail(String id) {
         Event event = new Event();
         event.documentToModel(collection.find(eq("_id", new ObjectId(id))).first());
-        ModelAndView modelAndView = new ModelAndView("share_detail");
-        modelAndView.addObject("event", event);
-        return modelAndView;
+        return event;
     }
 
     public ResBody join(String id, String weixin) {
@@ -90,8 +87,8 @@ public class EventDao {
         }
 
         MongoCollection<Document> coll = mongo.getCollection("event_participants");
-        if (coll.find(eq("weixin", weixin)).first() != null) {
-            return ResBody.returnFail(-1, "已经报名");
+        if (coll.find(and(eq("weixin", weixin), eq("_id", new ObjectId(id)))).first() != null) {
+            return ResBody.returnFail(-1, "活动已经报名");
         }
         EventParticipant eventParticipant = new EventParticipant();
         eventParticipant.setWeixin(weixin);
@@ -148,27 +145,28 @@ public class EventDao {
         //collection.insertOne(event.modelToDocument());
 
         List<Document> documents = new ArrayList<Document>();
+        //过滤type等于1(未上线)的活动
+        documents.add(new Document("$match", ne("state.type", "1")));
+
+        //按order排序
+        documents.add(new Document("$sort", new Document("order", 1)));
+
+        //需要返回的字段
         Document showField = new Document("_id", "$_id")
                 .append("order", "$order")
                 .append("state", "$state")
-                .append("thumbnail_image", "$thumbnail_image")
-                .append("detail_image", "$detail_image")
-                .append("sign_up_image", "$sign_up_image")
-                .append("partner_image", "$partner_image")
-                .append("name", "$name");
+                .append("thumbnail_image", "$thumbnail_image");
 
+        //按照分类type进行分组
         Document subGroup = new Document("_id", "$type")
                 .append("type", new Document("$first", "$type"))
                 .append("desc_type", new Document("$first", "$desc_type"))
                 .append("events", new Document("$push", showField));
 
         Document group = new Document("$group", subGroup);
-
         documents.add(group);
 
-        Document sort = new Document("$sort", new Document("type", 1).append("order", 1));
-
-        documents.add(sort);
+        documents.add(new Document("$sort", new Document("type", 1)));
 
         final List<EventQuery> queries = new ArrayList<EventQuery>();
         collection.aggregate(documents).forEach(new Block<Document>() {

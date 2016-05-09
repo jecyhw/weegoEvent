@@ -21,12 +21,12 @@ public class EventServiceImpl implements EventService {
     @Resource
     private EventDao eventDao;
 
-    public ModelAndView query() {
-        return eventDao.query();
+    public ModelAndView list() {
+        return new ModelAndView("newshare", "eventList", eventDao.list());
     }
 
     public ModelAndView detail(String id) {
-        return eventDao.detail(id);
+        return new ModelAndView("share_detail", "event", eventDao.detail(id));
     }
 
     public ResBody join(String id, String weixin) {

@@ -22,11 +22,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="wechat" />
         <module name="weegoCMS" />
+        <module name="wexin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="wechat" target="1.5" />
       <module name="weegoCMS" target="1.5" />
+      <module name="wexin" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
