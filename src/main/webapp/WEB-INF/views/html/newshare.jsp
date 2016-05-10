@@ -37,34 +37,36 @@
                             <div class="title">
                                 <c:out value="${dataEvent.type.desc}"/>
                             </div>
-                            <c:set var="number" value="1" ></c:set>
-                            <!-- 循环events -->
-                            <c:forEach items="${dataEvent.events}" var="event">
-                                <c:if test="${event.state.type != '1'}">
-                                    <c:set var="image" value="${event.image}"/>
-                                    <div class="pic">
-                                        <div class="number">${number}</div><!-- 编号 -->
-                                        <c:set var="number" value="${number + 1}"/>
-                                        <img class="aty" src="${image.thumbnail}"><!-- 活动图片 -->
-                                        <!-- if判断状态 显示不同状态的报名图片-->
-                                        <c:choose>
-                                            <c:when test="${event.state.type == '2' || event.state.type == '3'}">
-                                                <a href="detail?id=${event.id}"><!-- 参数 -->
-                                                    <div class="btn join">
+                            <div class="xunhuan">
+                                <c:set var="number" value="1" ></c:set>
+                                <!-- 循环events -->
+                                <c:forEach items="${dataEvent.events}" var="event">
+                                    <c:if test="${event.state.type != '1'}">
+                                        <c:set var="image" value="${event.image}"/>
+                                        <div class="pic">
+                                            <div class="number">${number}</div><!-- 编号 -->
+                                            <c:set var="number" value="${number + 1}"/>
+                                            <img class="aty" src="${image.thumbnail}"><!-- 活动图片 -->
+                                            <!-- if判断状态 显示不同状态的报名图片-->
+                                            <c:choose>
+                                                <c:when test="${event.state.type == '2' || event.state.type == '3'}">
+                                                    <a href="detail?id=${event.id}"><!-- 参数 -->
+                                                        <div class="btn join">
+                                                        </div>
+                                                    </a>
+                                                </c:when>
+                                                <c:when test="${event.state.type == '4'}">
+                                                    <img class="next" src="../resource/img/share/next.png">
+                                                </c:when>
+                                                <c:when test="${event.state.type == '5'}">
+                                                    <div class="btn return">
                                                     </div>
-                                                </a>
-                                            </c:when>
-                                            <c:when test="${event.state.type == '4'}">
-                                                <img class="next" src="../resource/img/share/next.png">
-                                            </c:when>
-                                            <c:when test="${event.state.type == '5'}">
-                                                <div class="btn return">
-                                                </div>
-                                            </c:when>
-                                        </c:choose>
-                                    </div>
-                                </c:if>
-                            </c:forEach>
+                                                </c:when>
+                                            </c:choose>
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
                         </div>
                     </c:forEach>
                 </div>

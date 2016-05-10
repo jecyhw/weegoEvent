@@ -20,7 +20,7 @@
                 <input class="nameWei" type="text" name="weixin"/>
                 <input type="hidden" value="${event.id}" name="id"/>
                 <input type="hidden" value="${event.state.type}" name="type"/>
-                <img class="canjia" src="../resource/img/share/submit.png">
+                <div class="canjia"></div>
             </form>
         </div>
     </div>
