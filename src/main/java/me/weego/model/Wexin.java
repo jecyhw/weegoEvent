@@ -1,5 +1,6 @@
 package me.weego.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.Document;
 
 import java.util.Date;
@@ -8,50 +9,51 @@ import java.util.Date;
  * Created by root on 16-5-9.
  */
 public class Wexin extends Model{
-    final public static Integer ACCESS_TOKEN_EXPRIE;
-    final public static Integer JSAPI_TICKET_EXPRIE;
 
-    static {
-        int temp = 3600;
-        try {
-            temp = Integer.valueOf(System.getProperty("access_token_expire"));
-        } catch (Exception e) {
-        }
-        ACCESS_TOKEN_EXPRIE = temp;
+    private AccessToken accessToken;
+    private JsapiTicket jsapiTicket;
 
-        temp = 3600;
-        try {
-            temp  = Integer.valueOf(System.getProperty("jsapi_ticket_expire"));
-        } catch (Exception e) {
-        }
-        JSAPI_TICKET_EXPRIE = temp;
+    public AccessToken getAccessToken() {
+        return accessToken;
     }
 
-
-    private AccessToken accessToken = new AccessToken();
-    private JsapiTicket jsapiTicket = new JsapiTicket();
-
-    public static Integer getAccessTokenExprie() {
-        return ACCESS_TOKEN_EXPRIE;
+    public void setAccessToken(AccessToken accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public static Integer getJsapiTicketExprie() {
-        return JSAPI_TICKET_EXPRIE;
+    public JsapiTicket getJsapiTicket() {
+        return jsapiTicket;
+    }
+
+    public void setJsapiTicket(JsapiTicket jsapiTicket) {
+        this.jsapiTicket = jsapiTicket;
     }
 
     @Override
     protected void document2Model(Document doc) {
-        accessToken.documentToModel(doc.get("access_token", Document.class));
-        jsapiTicket.document2Model(doc.get("jsapi_ticket", Document.class));
+        accessToken = new AccessToken().documentToModel(doc.get("access_token", Document.class), AccessToken.class);
+        jsapiTicket = new JsapiTicket().documentToModel(doc.get("jsapi_ticket", Document.class), JsapiTicket.class);
     }
 
     @Override
     public void modelToDocument(Document doc, boolean flag) {
-        doc.append("access_token", accessToken.modelToDocument());
-        doc.append("jsapi_ticket", jsapiTicket.modelToDocument());
+        if (this.accessToken != null) {
+            doc.append("access_token", this.accessToken.modelToDocument());
+        }
+        if (this.jsapiTicket != null) {
+            doc.append("jsapi_ticket", this.jsapiTicket.modelToDocument());
+        }
     }
 
-    private class AccessToken  extends Model{
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("accessToken", this.accessToken)
+                .append("jsapiTicket", this.jsapiTicket)
+                .toString();
+    }
+
+    static public class AccessToken  extends Model{
         private String accessToken;
         private Date date;
         private Integer expire;
@@ -93,9 +95,18 @@ public class Wexin extends Model{
             doc.append("date", this.date);
             doc.append("expire", this.expire);
         }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .append("accessToken", this.accessToken)
+                    .append("date", this.date)
+                    .append("expire", this.expire)
+                    .toString();
+        }
     }
 
-    private class JsapiTicket  extends Model{
+    static public class JsapiTicket  extends Model{
         private String jsapiTicket;
         private Date date;
         private Integer expire;
@@ -136,6 +147,15 @@ public class Wexin extends Model{
             doc.append("jsapi_ticket", this.jsapiTicket);
             doc.append("date", this.date);
             doc.append("expire", this.expire);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .append("jsapiTicket", this.jsapiTicket)
+                    .append("date", this.date)
+                    .append("expire", this.expire)
+                    .toString();
         }
     }
 }

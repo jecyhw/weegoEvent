@@ -60,4 +60,11 @@
         <property name="db" value="${mongodb.db}"/>
         <property name="server" value="${mongodb.url}"/>
     </bean>
+
+    <bean id="wechat" class="me.weego.util.WexinUtil.Wechat">
+        <property name="appid" value="${wechat.appid}"/>
+        <property name="secret" value="${wechat.secret}"/>
+        <property name="grantType" value="${wechat.grant_type}"/>
+        <property name="expire" value="wechat.expire"/>
+    </bean>
 </beans>
