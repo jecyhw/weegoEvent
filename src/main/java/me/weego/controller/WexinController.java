@@ -1,7 +1,7 @@
 package me.weego.controller;
 
-import me.weego.pojo.ResBody;
 import me.weego.service.WexinService;
+import me.weego.pojo.ResBody;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

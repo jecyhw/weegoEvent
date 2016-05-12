@@ -2,7 +2,6 @@ package me.weego.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 /**
  * Created by root on 16-5-4.

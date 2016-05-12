@@ -19,15 +19,15 @@ public class WexinServiceImpl implements WexinService{
     private WexinDao wexinDao;
 
     public Wexin.AccessToken accessToken() {
-        return wexinDao.getAccessToken();
+        return wexinDao.accessToken();
     }
 
     public Wexin.JsapiTicket jsapiTicket() {
-        return wexinDao.getJsapiTicket();
+        return wexinDao.jsapiTicket();
     }
 
     public Wexin.Config config(String url) {
         checkArgument(StringUtils.isNotBlank(url), "param should with url");
-        return wexinDao.getConfig(url);
+        return wexinDao.config(url);
     }
 }

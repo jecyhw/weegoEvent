@@ -2,12 +2,12 @@ package me.weego.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 /**
  * Created by ln on 16-4-22.
  * 城市活动
  */
+
 public class Event extends Model{
     private String id;
     private City city;
@@ -84,13 +84,13 @@ public class Event extends Model{
 
     @Override
     protected void document2Model(Document doc) {
-        this.id = Model.getObjectId(doc).toString();
-        this.city = new City().documentToModel(Model.getSubDocument(doc, "city"), City.class);
+        this.id = getObjectId(doc).toString();
+        this.city = new City().documentToModel(getSubDocument(doc, "city"), City.class);
         this.name = doc.getString("name");
-        this.state = new State().documentToModel(Model.getSubDocument(doc, "state"), State.class);
+        this.state = new State().documentToModel(getSubDocument(doc, "state"), State.class);
         this.type = new Type().documentToModel(doc, Type.class);
         this.order = doc.getString("order");
-        this.time = new Time().documentToModel(Model.getSubDocument(doc, "time"), Time.class);
+        this.time = new Time().documentToModel(getSubDocument(doc, "time"), Time.class);
         this.image = new Image().documentToModel(doc, Image.class);
     }
 

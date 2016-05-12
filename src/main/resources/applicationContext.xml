@@ -8,14 +8,13 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true"/>
-    <context:component-scan base-package="me.weego"/>
+    <context:component-scan base-package="model.weego"/>
 
     <context:annotation-config/>
 
     <mvc:annotation-driven>
         <mvc:message-converters>
             <ref bean="stringHttpMessageConverter"/>
-            <!-- 设置不输出null字段-->
             <ref bean="jsonMessageConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
@@ -42,6 +41,7 @@
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="objectMapper">
             <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                <!-- 设置不输出null字段-->
                 <property name="serializationInclusion" value="NON_NULL"/>
             </bean>
         </property>
