@@ -15,6 +15,8 @@
     <mvc:annotation-driven>
         <mvc:message-converters>
             <ref bean="stringHttpMessageConverter"/>
+            <!-- 设置不输出null字段-->
+            <ref bean="jsonMessageConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
@@ -26,18 +28,24 @@
         </property>
     </bean>
 
-    <!-- JSON适配器 -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="jsonMessageConverter"/>
-            </list>
-        </property>
-    </bean>
+    <!--&lt;!&ndash; JSON适配器 &ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<ref bean="jsonMessageConverter"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
 
     <!-- JSON视图 -->
     <bean id="jsonMessageConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper">
+            <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                <property name="serializationInclusion" value="NON_NULL"/>
+            </bean>
+        </property>
+    </bean>
 
     <!-- jsp视图 -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

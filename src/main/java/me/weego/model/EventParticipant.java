@@ -13,18 +13,18 @@ import java.util.Date;
  * Created by root on 16-5-4.
  */
 public class EventParticipant extends Model{
-    private ObjectId id;
+    private String id;
     private String weixin;
     private String date;
     private String shareWay;
     private Event event;
 
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -62,7 +62,7 @@ public class EventParticipant extends Model{
 
     @Override
     protected void document2Model(Document doc) {
-        this.id = Model.getObjectId(doc);
+        this.id = Model.getObjectId(doc).toString();
         this.weixin = doc.getString("weixin");
         this.date = doc.getString("date");
         this.shareWay = doc.getString("share_way");
@@ -104,7 +104,7 @@ public class EventParticipant extends Model{
         eventParticipant.setDate(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 
         Event event = new Event();
-        event.setId(new ObjectId());
+        event.setId(new ObjectId().toString());
         eventParticipant.setEvent(event);
 
         MongoClient mongoClient = new MongoClient("123.56.65.17");

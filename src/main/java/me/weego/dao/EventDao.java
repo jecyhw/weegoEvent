@@ -95,7 +95,7 @@ public class EventDao {
         eventParticipant.setDate(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 
         Event event = new Event();
-        event.setId(new ObjectId(id));
+        event.setId(id);
         eventParticipant.setEvent(event);
 
         coll.insertOne(eventParticipant.modelToDocument());
@@ -107,7 +107,7 @@ public class EventDao {
         event.setName("活动");
 
         City city = new City();
-        city.setId(new ObjectId());
+        city.setId(new ObjectId().toString());
         city.setName("北京");
         event.setCity(city);
 

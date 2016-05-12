@@ -9,7 +9,7 @@ import org.bson.types.ObjectId;
  * 城市活动
  */
 public class Event extends Model{
-    private ObjectId id;
+    private String id;
     private City city;
     private String name;
     private State state;
@@ -18,11 +18,11 @@ public class Event extends Model{
     private Time time;
     private Image image;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -84,7 +84,7 @@ public class Event extends Model{
 
     @Override
     protected void document2Model(Document doc) {
-        this.id = Model.getObjectId(doc);
+        this.id = Model.getObjectId(doc).toString();
         this.city = new City().documentToModel(Model.getSubDocument(doc, "city"), City.class);
         this.name = doc.getString("name");
         this.state = new State().documentToModel(Model.getSubDocument(doc, "state"), State.class);
@@ -96,8 +96,8 @@ public class Event extends Model{
 
     @Override
     public void modelToDocument(Document doc, boolean flag) {
-        if (flag) {
-            doc.put("_id", this.id.toString());
+        if (this.id != null && flag) {
+            doc.put("_id", this.id);
         }
         if (this.city != null) {
             doc.put("city", this.city.modelToDocument(true));

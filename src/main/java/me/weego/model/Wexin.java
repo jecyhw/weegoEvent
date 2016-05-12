@@ -1,5 +1,6 @@
 package me.weego.model;
 
+import me.weego.util.LoggerUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.Document;
 
@@ -163,6 +164,9 @@ public class Wexin extends Model{
 
     static public class Config {
         private String appId;
+        /**
+         * 特别注意,jsapi加密的时间戳以秒为单位的
+         */
         private Long timestamp;
         private String nonceStr;
         private String signature;
@@ -180,7 +184,7 @@ public class Wexin extends Model{
         }
 
         public void setTimestamp(Long timestamp) {
-            this.timestamp = timestamp;
+            this.timestamp = timestamp / 1000;
         }
 
         public String getNonceStr() {
@@ -205,6 +209,7 @@ public class Wexin extends Model{
                     .append("&noncestr=").append(this.nonceStr)
                     .append("&timestamp=").append(this.timestamp)
                     .append("&url=").append(url);
+            LoggerUtil.logBiz("signature", builder.toString());
             try {
                 MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
                 sha1.update(builder.toString().getBytes());
