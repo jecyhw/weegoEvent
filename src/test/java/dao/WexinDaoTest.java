@@ -10,23 +10,23 @@ import javax.annotation.Resource;
 /**
  * Created by root on 16-5-12.
  */
-public class WexinDaoTest extends BaseTest{
+public class WexinDaoTest{
 
-    @Resource
-    WexinDao wexinDao;
-
-    @Test
-    public void getAccessToken() {
-        JsonUtil.writeAsString(wexinDao.accessToken());
-    }
-
-    @Test
-    public void getJsapiTicket() {
-        JsonUtil.writeAsString(wexinDao.jsapiTicket());
-    }
-
-    @Test
-    public void getConfig() {
-        JsonUtil.writeAsString(wexinDao.config("http://localhost:8080/event/v1/list"));
-    }
+//    @Resource
+//    WexinDao wexinDao;
+//
+//    @Test
+//    public void accessToken() {
+//        JsonUtil.writeAsString(wexinDao.accessToken());
+//    }
+//
+//    @Test
+//    public void jsapiTicket() {
+//        JsonUtil.writeAsString(wexinDao.jsapiTicket());
+//    }
+//
+//    @Test
+//    public void config() {
+//        JsonUtil.writeAsString(wexinDao.config("http://localhost:8080/event/v1/list"));
+//    }
 }
