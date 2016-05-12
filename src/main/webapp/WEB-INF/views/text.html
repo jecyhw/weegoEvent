@@ -1,0 +1,45 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta property="wb:webmaster" content="6661ff5171d0e399">
+    <meta name="keywords" content="数说传播 SpreadStory 微信传播监测 H5传播监测 微信监测 H5监测">
+    <meta name="description" content="全国首个微信H5免费监测工具">
+    <title>数说传播代码示例页</title>
+    <style>
+        body{  padding: 10px 20px; }
+        .demoBtn{
+            padding: 4px 6px;
+            background:#6780d4 ;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 16px;
+            border: none;
+        }
+        .tip{  color: #6780d4; }
+        .demoBtn,.tip{  font-size: 14px; }
+        h3{
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+<h3>数说传播代码添加示例</h3>
+<button id="myBtn" class="demoBtn">监测按钮</button> <br><br><span class="tip"> 请右键查看网页源代码</span> <!-- 添加监测代码的按钮 -->
+
+<!-- 基本监测代码（必须） -->
+<script id="DS_PRE_JS" type="text/javascript"
+        src="http://cdn.datastory.com.cn/js/pre-ds-min.js?dsTid=4df5755d-2688-4113-8142-b78dd505d47e">
+</script>
+
+<!-- 按钮监测代码示例 -->
+<script type="text/javascript">
+    var myBtn = document.getElementById( "myBtn" );
+    myBtn.onclick = function ( ){
+        DS.ready(function(){
+            DS.sendBtnName("监测按钮"); //这里填写你对按钮的命名
+        });
+    }
+</script>
+</body>
+</html>

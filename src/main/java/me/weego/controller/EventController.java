@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 /**
  * @author tcl
  */
-@RestController()
+@RestController
 @RequestMapping("/event/v1")
 public class EventController extends BaseController {
     @Resource

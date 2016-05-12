@@ -3,8 +3,6 @@ package me.weego.model;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import javax.print.Doc;
-
 /**
  * Created by root on 16-5-5.
  */

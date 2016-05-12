@@ -1,31 +1,24 @@
 package me.weego.model;
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.bson.Document;
-import org.bson.types.ObjectId;
-
-import java.util.Date;
 
 /**
  * Created by root on 16-5-4.
  */
 public class EventParticipant extends Model{
-    private ObjectId id;
+    private String id;
     private String weixin;
     private String date;
     private String shareWay;
     private Event event;
 
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -63,11 +56,11 @@ public class EventParticipant extends Model{
 
     @Override
     protected void document2Model(Document doc) {
-        this.id = Model.getObjectId(doc);
+        this.id = getObjectId(doc).toString();
         this.weixin = doc.getString("weixin");
         this.date = doc.getString("date");
         this.shareWay = doc.getString("share_way");
-        this.event = new Event().documentToModel(Model.getSubDocument(doc, "event"), Event.class);
+        this.event = new Event().documentToModel(getSubDocument(doc, "event"), Event.class);
     }
 
     @Override
@@ -97,19 +90,5 @@ public class EventParticipant extends Model{
                 .append("date", this.date)
                 .append("share_way", this.shareWay)
                 .toString();
-    }
-
-    static public void main(String[] args) {
-        EventParticipant eventParticipant = new EventParticipant();
-        eventParticipant.setWeixin("11111");
-        eventParticipant.setDate(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-
-        Event event = new Event();
-        event.setId(new ObjectId());
-        eventParticipant.setEvent(event);
-
-        MongoClient mongoClient = new MongoClient("123.56.65.17");
-        MongoCollection<Document> collection = mongoClient.getDatabase("travel1").getCollection("event_participants");
-        collection.insertOne(eventParticipant.modelToDocument());
     }
 }

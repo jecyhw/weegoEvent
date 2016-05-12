@@ -1,7 +1,6 @@
 package me.weego.service.impl;
 
 import me.weego.dao.EventDao;
-import me.weego.model.Event;
 import me.weego.pojo.ResBody;
 import me.weego.service.EventService;
 import org.apache.commons.lang3.StringUtils;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 

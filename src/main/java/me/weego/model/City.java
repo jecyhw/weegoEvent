@@ -2,20 +2,19 @@ package me.weego.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 /**
  * Created by root on 16-5-4.
  */
 public class City extends Model{
-    private ObjectId id;
+    private String id;
     private String name;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -33,14 +32,14 @@ public class City extends Model{
 
     @Override
     protected void document2Model(Document doc) {
-        this.id = Model.getObjectId(doc);
+        this.id = Model.getObjectId(doc).toString();
         this.name = doc.getString("name");
     }
 
     @Override
     public void modelToDocument(Document doc, boolean flag) {
         if (this.id != null && flag) {
-            doc.put("_id", this.id.toString());
+            doc.put("_id", this.id);
         }
         if (this.name != null) {
             doc.put("name", this.name);
