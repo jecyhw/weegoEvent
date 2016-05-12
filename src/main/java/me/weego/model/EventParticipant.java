@@ -2,7 +2,6 @@ package me.weego.model;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.bson.Document;

@@ -65,6 +65,6 @@
         <property name="appid" value="${wechat.appid}"/>
         <property name="secret" value="${wechat.secret}"/>
         <property name="grantType" value="${wechat.grant_type}"/>
-        <property name="expire" value="wechat.expire"/>
+        <property name="expire" value="${wechat.expire}"/>
     </bean>
 </beans>

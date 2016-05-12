@@ -3,6 +3,8 @@ package me.weego.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.Document;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 /**
@@ -156,6 +158,70 @@ public class Wexin extends Model{
                     .append("date", this.date)
                     .append("expire", this.expire)
                     .toString();
+        }
+    }
+
+    static public class Config {
+        private String appId;
+        private Long timestamp;
+        private String nonceStr;
+        private String signature;
+
+        public String getAppId() {
+            return appId;
+        }
+
+        public void setAppId(String appId) {
+            this.appId = appId;
+        }
+
+        public Long getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(Long timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public String getNonceStr() {
+            return nonceStr;
+        }
+
+        public void setNonceStr(String nonceStr) {
+            this.nonceStr = nonceStr;
+        }
+
+        public String getSignature() {
+            return signature;
+        }
+
+        public void setSignature(String signature) {
+            this.signature = signature;
+        }
+
+        public void encryptionBySha1(String jsapiTicket, String url) {
+            StringBuilder builder = new StringBuilder();
+            builder.append("jsapi_ticket=").append(jsapiTicket)
+                    .append("&noncestr=").append(this.nonceStr)
+                    .append("&timestamp=").append(this.timestamp)
+                    .append("&url=").append(url);
+            try {
+                MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
+                sha1.update(builder.toString().getBytes());
+
+                builder.delete(0, builder.length());
+                byte[] messageSha1 = sha1.digest();
+                for (byte temp : messageSha1) {
+                    String shaHex = Integer.toHexString(temp & 0xFF);
+                    if (shaHex.length() < 2) {
+                        builder.append(0);
+                    }
+                    builder.append(shaHex);
+                }
+                this.signature = builder.toString();
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

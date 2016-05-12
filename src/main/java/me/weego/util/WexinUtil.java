@@ -6,6 +6,7 @@ import com.squareup.okhttp.Response;
 import me.weego.model.Wexin;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -14,16 +15,25 @@ import java.util.Date;
 /**
  * Created by root on 16-5-9.
  */
+@Component
 public class WexinUtil {
+    private static Wechat wechat;
+
     @Resource
-    static Wechat wechat;
+    public void setWechat(Wechat wechat) {//使用注解给static类型赋值
+        WexinUtil.wechat = wechat;
+    }
 
     static private String getAccessTokenUrl() {
         return new StringBuilder("https://api.weixin.qq.com/cgi-bin/token?")
                 .append("grant_type=").append(wechat.getGrantType())
                 .append("&appid=").append(wechat.getAppid())
-                .append("secret=").append(wechat.getSecret())
+                .append("&secret=").append(wechat.getSecret())
                 .toString();
+    }
+
+    static public String getAppId() {
+        return wechat.getAppid();
     }
 
     static private String getJsapiTicketUrl(String accessToken) {
@@ -97,20 +107,17 @@ public class WexinUtil {
      * @return 返回减去后的时间
      */
     static public Integer getExpire(Integer expire) {
-        return getExpire(expire, 3600);
-    }
+        int wechatExpire = Integer.MAX_VALUE;
+        try {
+            wechatExpire = Integer.parseInt(wechat.expire);
+        } catch (Exception e) {
 
-    /**
-     * 获取access_token和jsapi_ticket的过期时间,默认是实际时间减去100s
-     * @param expire 微信jsapi接口获取的实际过期时间,微信默认的有效期是7200s
-     * @param decrease 要减去的时间
-     * @return 返回减去后的时间
-     */
-    static public Integer getExpire(Integer expire, Integer decrease) {
-        if (expire > decrease) {
-            return expire - decrease;
         }
-        return expire;
+        if (expire > wechatExpire) {
+            return wechatExpire;
+        } else {
+            return expire / 2;
+        }
     }
 
     static public class Wechat {
@@ -120,7 +127,6 @@ public class WexinUtil {
         private String expire;
 
         private Wechat() {
-
         }
 
         public String getAppid() {
@@ -160,7 +166,7 @@ public class WexinUtil {
             return new ToStringBuilder(this)
                     .append("appid", this.appid)
                     .append("secret", this.secret)
-                    .append("expire", this.grantType)
+                    .append("grantType", this.grantType)
                     .append("expire", this.grantType)
                     .toString();
         }

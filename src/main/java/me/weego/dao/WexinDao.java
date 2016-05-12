@@ -3,6 +3,7 @@ package me.weego.dao;
 import com.mongodb.client.MongoCollection;
 import me.weego.model.Wexin;
 import me.weego.util.WexinUtil;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.bson.Document;
 import org.json.JSONObject;
@@ -47,22 +48,31 @@ public class WexinDao {
             Wexin.AccessToken accessToken = wexin.getAccessToken();
             if (DateUtils.addSeconds(accessToken.getDate(), WexinUtil.getExpire(accessToken.getExpire())).before(new Date())) {
                 //access_token已经失效,需要重新获取
-                wexin.setAccessToken(WexinUtil.getAccessToken());
+                accessToken = WexinUtil.getAccessToken();
                 update = true;
             }
             //判断jsapi_ticket是否失效
             Wexin.JsapiTicket jsapiTicket = wexin.getJsapiTicket();
             if (DateUtils.addSeconds(jsapiTicket.getDate(), WexinUtil.getExpire(jsapiTicket.getExpire())).before(new Date())) {
                 //jsapi_ticket已经失效,需要重新获取
-                wexin.setJsapiTicket(WexinUtil.getJsapiTicket(accessToken.getAccessToken()));
+                jsapiTicket = WexinUtil.getJsapiTicket(accessToken.getAccessToken());
                 update = true;
             }
             if (update) {
+                wexin.setAccessToken(accessToken);
+                wexin.setJsapiTicket(jsapiTicket);
                 this.collection.findOneAndReplace(new Document(), wexin.modelToDocument());
             }
         }
         return wexin.getJsapiTicket();
     }
 
-
+    public Wexin.Config getConfig(String url) {
+        Wexin.Config config = new Wexin.Config();
+        config.setAppId(WexinUtil.getAppId());
+        config.setTimestamp(System.currentTimeMillis());
+        config.setNonceStr(RandomStringUtils.randomAlphanumeric(32));
+        config.encryptionBySha1(getJsapiTicket().getJsapiTicket(), url);
+        return config;
+    }
 }

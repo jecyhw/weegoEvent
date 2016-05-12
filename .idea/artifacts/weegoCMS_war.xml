@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="weegoCMS:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="weegoCMS.war">
-      <element id="artifact" artifact-name="weegoCMS:war exploded" />
-    </root>
-  </artifact>
-</component>
