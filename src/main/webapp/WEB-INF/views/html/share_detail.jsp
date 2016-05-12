@@ -37,7 +37,7 @@
 
 <script type="text/javascript">
     var myBtn = document.getElementById( "canjia" );
-    var share_link = "http://social.datastory.com.cn/mrankIndex";
+    var share_link = "http://123.56.65.17:8080/cms/event/v1/list";
     var share_img = "../resource/img/share/cover.jpg";
 
     myBtn.onclick = function ( ){
