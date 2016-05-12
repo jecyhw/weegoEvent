@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%--<%@ page isELIgnored="false" %>--%>
+<c:set var="serverContext" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}" ></c:set>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +51,7 @@
                                             <!-- if判断状态 显示不同状态的报名图片-->
                                             <c:choose>
                                                 <c:when test="${event.state.type == '2' || event.state.type == '3'}">
-                                                    <a href="detail?id=${event.id}"><!-- 参数 -->
+                                                    <a href="${serverContext}/event/v1/detail?id=${event.id}"><!-- 参数 -->
                                                         <div class="btn join">
                                                         </div>
                                                     </a>
