@@ -6,7 +6,6 @@ import me.weego.util.WexinUtil;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.bson.Document;
-import org.json.JSONObject;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -29,12 +28,12 @@ public class WexinDao {
         wexin = new Wexin();
     }
 
-    public Wexin.AccessToken getAccessToken() {
-        getJsapiTicket();
+    public Wexin.AccessToken accessToken() {
+        this.jsapiTicket();
         return wexin.getAccessToken();
     }
 
-    public Wexin.JsapiTicket getJsapiTicket() {
+    public Wexin.JsapiTicket jsapiTicket() {
         Document doc = this.collection.find().first();
 
         if (doc == null) {//第一次请求
@@ -67,12 +66,12 @@ public class WexinDao {
         return wexin.getJsapiTicket();
     }
 
-    public Wexin.Config getConfig(String url) {
+    public Wexin.Config config(String url) {
         Wexin.Config config = new Wexin.Config();
         config.setAppId(WexinUtil.getAppId());
         config.setTimestamp(System.currentTimeMillis());
         config.setNonceStr(RandomStringUtils.randomAlphanumeric(32));
-        config.encryptionBySha1(getJsapiTicket().getJsapiTicket(), url);
+        config.encryptionBySha1(this.jsapiTicket().getJsapiTicket(), url);
         return config;
     }
 }
