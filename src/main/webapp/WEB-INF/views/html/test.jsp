@@ -50,8 +50,8 @@
                     ]
                 });
                 wx.ready(function () {
-                    alert("wx.ready");
                     DS.ready(function () {
+                        alert("wx.ready");
                         wx.onMenuShareAppMessage({
                             title: share_title,
                             desc: share_desc,
