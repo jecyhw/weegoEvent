@@ -24,7 +24,7 @@
                 <input class="nameWei" type="text" name="weixin"/>
                 <input type="hidden" value="${event.id}" name="id"/>
                 <input type="hidden" value="${event.state.type}" name="type"/>
-                <button class="canjia" id="canjia"></button>
+                <button class="canjia" id="canjia" name="canjia"></button>
             </form>
         </div>
     </div>
@@ -36,70 +36,73 @@
 </div>
 
 <script type="text/javascript">
-    var myBtn = document.getElementById( "canjia" );
-    var share_link = "http://123.56.65.17:8080/cms/event/v1/list";
-    var share_img = "../resource/img/share/cover.jpg";
+        var myBtn = document.getElementById( "canjia" );
+        var share_link = "http://www.weegotr.com/weegoevent/event/v1/list";
+        var share_img = "http://weegotest.b0.upaiyun.com/brands/origin/573559982584c1097a000007.jpeg";
+        var share_title = "我在参加Weego全球限量活动，价值百万的福利你值得拥有！";
+        var share_desc = "Weego 简单你的旅行";
 
-    myBtn.onclick = function ( ){
-        DS.ready(function(){
-            DS.sendBtnName("canjia"); //这里填写你对按钮的命名
-        });                                                               
-    }
-    DS.ready(function(){
-        DS.sendAuthUserInfo(userInfo, 'wx15f7fb74b6f16e17');
-    });
-
-    $.ajax({
-        url: "${serverContext}/weixin/v1/config",
-        type: "GET" ,
-        data:{
-           url:location.href.split('#')[0]
-        },
-        success:function(data) {
-            if(data.code == '0'){
-                wx.config({
-                    debug: true,
-                    appId: data.data.appId, // 必填，公众号的唯一标识
-                    timestamp: data.data.timestamp, // 必填，生成签名的时间戳
-                    nonceStr: data.data.nonceStr, // 必填，生成签名的随机串
-                    signature: data.data.signature,// 必填，签名，见附录1
-                    jsApiList: [
-                       'onMenuShareTimeline',
-                        'onMenuShareAppMessage'
-                    ]
-                });
-                wx.ready(function () {
-                    DS.ready(function () {
-                        wx.onMenuShareAppMessage({
-                            title: share_title,
-                            desc: share_desc,
-                            link: DS.linkChange(share_link),
-                            imgUrl: share_img,
-                            success: function () {
-                                DS.sendRepost("appMessage");
-                                alert("分享成功");
-                                //other code
-                            }
-                        });
-                        wx.onMenuShareTimeline({
-                            title: share_desc,
-                            desc: share_desc,
-                            link: DS.linkChange(share_link),
-                            imgUrl: share_img,
-                            success: function () {
-                                DS.sendRepost("timeline");
-                                alert("分享成功");
-                                //other code
-                            }
-                        });
+        myBtn.onclick = function ( ) {
+            DS.ready(function () {
+                DS.sendBtnName("canjia"); //这里填写你对按钮的命名
+            });
+        }
+        $.ajax({
+            url: "${serverContext}/weixin/v1/config",
+            type: "GET" ,
+            data:{
+               url:location.href.split('#')[0]
+            },
+            success:function(data) {
+                if(data.code == '0'){
+                    wx.config({
+                        debug: true,
+                        appId: data.data.appId, // 必填，公众号的唯一标识
+                        timestamp: data.data.timestamp, // 必填，生成签名的时间戳
+                        nonceStr: data.data.nonceStr, // 必填，生成签名的随机串
+                        signature: data.data.signature,// 必填，签名，见附录1
+                        jsApiList: [
+                           'onMenuShareTimeline',
+                            'onMenuShareAppMessage'
+                        ]
                     });
-                });
-            }
-            
-        },
-    },"json")
+                    wx.ready(function () {
+                        DS.ready(function () {
+                            wx.onMenuShareAppMessage({
+                                title: share_title,
+                                desc: share_desc,
+                                link:share_link,
+                                imgUrl: share_img,
+                                success: function () {
+                                    DS.sendRepost("appMessage");
+                                }
+                            });
+                            wx.onMenuShareTimeline({
+                                title: share_title,
+                                desc: share_desc,
+                                link: share_link,
+                                imgUrl: share_img,
+                                success: function () {
+                                    DS.sendRepost("timeline");
 
-
+                                    //other code
+                                }/*,
+                                fail: function (res){
+                                },
+                                cancel: function (res){
+                                },
+                                trigger: function (res){
+                                }*/
+                            }); 
+                        });        
+                    });
+                    wx.error(function(res){
+                        // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                        //salert("error:"+res);
+                    });
+                }   
+            },
+        },"json")
 </script>
 <script>
     window.onload = function(){
