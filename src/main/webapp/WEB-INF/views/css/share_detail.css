@@ -17,6 +17,10 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+html, body {
+    width: 100%;
+}
+
 .top{
 	width: 100%;
 }
@@ -41,8 +45,9 @@ time, mark, audio, video {
 
 }
 .content .name .canjia{
-	width: 198px;
-	height: 64px;
+	border-radius: 10px;
+  	width: 190px;
+  	height: 58px;
 	background-image: url(../resource/img/share/submit.png);
 	padding: 0;
 	border: 0;
