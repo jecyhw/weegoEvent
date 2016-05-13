@@ -10,7 +10,7 @@ import javax.annotation.Resource;
  * Created by root on 16-5-11.
  */
 @RestController
-@RequestMapping("/wexin/v1")
+@RequestMapping("/wechat/v1")
 public class WexinController extends BaseController{
     @Resource
     WexinService wexinService;
