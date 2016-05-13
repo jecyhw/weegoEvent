@@ -70,9 +70,9 @@
     </bean>
 
     <bean id="wechat" class="me.weego.util.WeixinUtil.Wechat">
-        <property name="appid" value="${wechat.appid}"/>
-        <property name="secret" value="${wechat.secret}"/>
-        <property name="grantType" value="${wechat.grant_type}"/>
-        <property name="expire" value="${wechat.expire}"/>
+        <property name="appid" value="${weixin.appid}"/>
+        <property name="secret" value="${weixin.secret}"/>
+        <property name="grantType" value="${weixin.grant_type}"/>
+        <property name="expire" value="${weixin.expire}"/>
     </bean>
 </beans>
