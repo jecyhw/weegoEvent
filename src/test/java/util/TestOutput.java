@@ -11,13 +11,15 @@ public class TestOutput {
     static private Boolean isOutPutFile = false;
     static private String lineSeparator = System.getProperty("line.separator");
     static {
-        File file = new File(outPutFileName);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-                TestOutput.println(e.getMessage());
+        if (isOutPutFile) {
+            File file = new File(outPutFileName);
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    TestOutput.println(e.getMessage());
+                }
             }
         }
     }
