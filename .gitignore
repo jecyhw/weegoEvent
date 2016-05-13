@@ -1,6 +1,6 @@
 target/
 .idea/
-!.idea/modules.xml
 *.tar.gz
 catalina.base_IS_UNDEFINED/
-!.idea/misc.xml
+!/.idea/misc.xml
+!/.idea/modules.xml
