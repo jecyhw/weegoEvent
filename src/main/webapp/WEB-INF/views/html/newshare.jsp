@@ -79,13 +79,10 @@
 <script id="DS_PRE_JS" type="text/javascript"  src="http://cdn.datastory.com.cn/js/pre-ds-min.js?dsTid=b59d5cd1-2f48-4c76-8868-4f27ab46cb11">
 </script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script type="text/javascript" src="../resource/jquery.min.js"></script>
-
 <script src="../resource/slider/zepto_modify.js"></script>
 <script src="../resource/slider/PageSlider.js"></script>
 <script type="text/javascript">
-    var $j = jQuery.noConflict();
-    $j(document).ready(function(){
+    $(document).ready(function(){
         new PageSlider({
             pages: $('.page-wrap .page'),
         });
@@ -95,7 +92,7 @@
         var share_title = "我在参加Weego全球限量活动，价值百万的福利你值得拥有！";
         var share_desc = "Weego 简单你的旅行";
 
-        $j.ajax({
+        $.ajax({
             url: "${serverContext}/weixin/v1/config",
             type: "GET" ,
             data:{
@@ -145,8 +142,8 @@
             alert("活动尚未开始")
         });
 
-        var join=$j(".join");
-        var rtn=$j(".return");
+        var join=$(".join");
+        var rtn=$(".return");
         for(var i=0;i<join.length;i++){
             join[i].addEventListener('touchstart',function(){},false);
         };
