@@ -50,7 +50,7 @@
     });
 
     $.ajax({
-        url: "${serverContext}/wexin/v1/config",
+        url: "${serverContext}/weixin/v1/config",
         type: "GET" ,
         data:{
            url:location.href.split('#')[0]
