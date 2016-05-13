@@ -20,14 +20,15 @@
     var share_link = "http://www.weegotr.com/weegoevent/event/v1/list";
     var share_img = "../resource/img/share/cover.jpg";
 
-    myBtn.onclick = function ( ){
-        DS.ready(function(){
+    myBtn.onclick = function ( ) {
+        DS.ready(function () {
             DS.sendBtnName("微信分享"); //这里填写你对按钮的命名
-        });                                                               
+        });
     }
-    DS.ready(function(){
-        DS.sendAuthUserInfo(userInfo, 'wx15f7fb74b6f16e17');
-    });
+//    }
+//    DS.ready(function(){
+//        DS.sendAuthUserInfo(userInfo, 'wx15f7fb74b6f16e17');
+//    });
 
     $.ajax({
         url: "${serverContext}/weixin/v1/config",
@@ -49,6 +50,7 @@
                     ]
                 });
                 wx.ready(function () {
+                    alert("wx.ready");
                     DS.ready(function () {
                         wx.onMenuShareAppMessage({
                             title: share_title,
