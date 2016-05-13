@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%--<%@ page isELIgnored="false" %>--%>
-<c:set var="serverContext" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}" ></c:set>
+<c:set var="serverContext" value="${pageContext.request.contextPath}" ></c:set>
 <!DOCTYPE html>
 <html lang="en">
 <head>

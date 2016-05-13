@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="serverContext" value="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}" ></c:set>
+<c:set var="serverContext" value="${pageContext.request.contextPath}" ></c:set>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +77,7 @@
                             imgUrl: share_img,
                             success: function () {
                                 DS.sendRepost("appMessage");
+                                alert("分享成功");
                                 //other code
                             }
                         });
@@ -87,6 +88,7 @@
                             imgUrl: share_img,
                             success: function () {
                                 DS.sendRepost("timeline");
+                                alert("分享成功");
                                 //other code
                             }
                         });
