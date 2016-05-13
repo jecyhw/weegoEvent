@@ -69,7 +69,7 @@
         <property name="server" value="${mongodb.url}"/>
     </bean>
 
-    <bean id="wechat" class="me.weego.util.WexinUtil.Wechat">
+    <bean id="wechat" class="me.weego.util.WeixinUtil.Wechat">
         <property name="appid" value="${wechat.appid}"/>
         <property name="secret" value="${wechat.secret}"/>
         <property name="grantType" value="${wechat.grant_type}"/>

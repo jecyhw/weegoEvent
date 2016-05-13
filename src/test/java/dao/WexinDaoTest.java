@@ -1,12 +1,5 @@
 package dao;
 
-import base.BaseTest;
-import me.weego.dao.WexinDao;
-import org.junit.Test;
-import util.JsonUtil;
-
-import javax.annotation.Resource;
-
 /**
  * Created by root on 16-5-12.
  */

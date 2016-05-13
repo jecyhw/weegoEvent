@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Created by root on 16-5-9.
  */
-public class Wexin extends Model{
+public class Weixin extends Model{
 
     private AccessToken accessToken;
     private JsapiTicket jsapiTicket;

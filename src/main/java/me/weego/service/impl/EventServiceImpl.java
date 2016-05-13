@@ -24,7 +24,7 @@ public class EventServiceImpl implements EventService {
     }
 
     public ModelAndView detail(String id) {
-        return new ModelAndView("share_detail", "event", eventDao.detail(id));
+        return new ModelAndView("test", "event", eventDao.detail(id));
     }
 
     public ResBody join(String id, String weixin) {

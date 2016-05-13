@@ -3,7 +3,7 @@ package me.weego.util;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import me.weego.model.Wexin;
+import me.weego.model.Weixin;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
@@ -16,12 +16,12 @@ import java.util.Date;
  * Created by root on 16-5-9.
  */
 @Component
-public class WexinUtil {
+public class WeixinUtil {
     private static Wechat wechat;
 
     @Resource
     public void setWechat(Wechat wechat) {//使用注解给static类型赋值
-        WexinUtil.wechat = wechat;
+        WeixinUtil.wechat = wechat;
     }
 
     static private String getAccessTokenUrl() {
@@ -43,7 +43,7 @@ public class WexinUtil {
                 .toString();
     }
 
-    static public Wexin.AccessToken getAccessToken() {
+    static public Weixin.AccessToken getAccessToken() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(getAccessTokenUrl())
@@ -60,7 +60,7 @@ public class WexinUtil {
         }
 
         JSONObject jsonObject = new JSONObject(result);
-        Wexin.AccessToken accessToken = new Wexin.AccessToken();
+        Weixin.AccessToken accessToken = new Weixin.AccessToken();
         accessToken.setDate(new Date());
         accessToken.setAccessToken(jsonObject.getString("access_token"));
         accessToken.setExpire(jsonObject.getInt("expires_in"));
@@ -70,7 +70,7 @@ public class WexinUtil {
         return accessToken;
     }
 
-    static public Wexin.JsapiTicket getJsapiTicket(String accessToken) {
+    static public Weixin.JsapiTicket getJsapiTicket(String accessToken) {
         LoggerUtil.logBiz("accessToken", accessToken);
 
         String url = getJsapiTicketUrl(accessToken);
@@ -90,7 +90,7 @@ public class WexinUtil {
         }
 
         JSONObject jsonObject = new JSONObject(result);
-        Wexin.JsapiTicket jsapiTicket = new Wexin.JsapiTicket();
+        Weixin.JsapiTicket jsapiTicket = new Weixin.JsapiTicket();
         jsapiTicket.setDate(new Date());
         jsapiTicket.setJsapiTicket(jsonObject.getString("ticket"));
         jsapiTicket.setExpire(jsonObject.getInt("expires_in"));
