@@ -80,16 +80,22 @@
 </script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="../resource/jquery.min.js"></script>
+
 <script src="../resource/slider/zepto_modify.js"></script>
 <script src="../resource/slider/PageSlider.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
+    var $j = jQuery.noConflict();
+    $j(document).ready(function(){
+        new PageSlider({
+            pages: $('.page-wrap .page'),
+        });
+
         var share_link = "http://www.weegotr.com/weegoevent/event/v1/list";
         var share_img = "http://weegotest.b0.upaiyun.com/brands/origin/573559982584c1097a000007.jpeg";
         var share_title = "我在参加Weego全球限量活动，价值百万的福利你值得拥有！";
         var share_desc = "Weego 简单你的旅行";
 
-        $.ajax({
+        $j.ajax({
             url: "${serverContext}/weixin/v1/config",
             type: "GET" ,
             data:{
@@ -134,26 +140,21 @@ $(document).ready(function(){
                 }   
             },
         },"json")
-});
-new PageSlider({
-        pages: $('.page-wrap .page'),
-    });
+        
+        $(".next").click(function(){
+            alert("活动尚未开始")
+        });
 
-    $(".next").click(function(){
-        alert("活动尚未开始")
-    });
-    window.onload = function(){
-        var join=$(".join");
+        var join=$j(".join");
+        var rtn=$j(".return");
         for(var i=0;i<join.length;i++){
             join[i].addEventListener('touchstart',function(){},false);
         };
-        var rtn=$(".return");
         for(var i=0;i<rtn.length;i++){
-            rtn[i].addEventListener('touchstart',function(){
-            },false);
+            rtn[i].addEventListener('touchstart',function(){},false);
         }
-    }
         
+    });       
 </script>
 </body>
 </html>
