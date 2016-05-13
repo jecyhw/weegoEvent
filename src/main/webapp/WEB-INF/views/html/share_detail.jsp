@@ -46,7 +46,7 @@
         });                                                               
     }
     DS.ready(function(){
-        DS.sendAuthUserInfo(userInfo, wx15f7fb74b6f16e17);
+        DS.sendAuthUserInfo(userInfo, 'wx15f7fb74b6f16e17');
     });
 
     $.ajax({

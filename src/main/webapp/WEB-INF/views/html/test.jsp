@@ -12,25 +12,25 @@
 	<title>微信分享测试</title>
 </head>
 <body>
-	<button class="weixin" id="weixin"></button>
+	<button class="weixin" id="weixin">微信分享</button>
 
 
 	<script type="text/javascript">
     var myBtn = document.getElementById( "weixin" );
-    var share_link = "http://123.56.65.17:8080/cms/event/v1/list";
+    var share_link = "http://www.weegotr.com/weegoevent/event/v1/list";
     var share_img = "../resource/img/share/cover.jpg";
 
     myBtn.onclick = function ( ){
         DS.ready(function(){
-            DS.sendBtnName("weixin"); //这里填写你对按钮的命名
+            DS.sendBtnName("微信分享"); //这里填写你对按钮的命名
         });                                                               
     }
     DS.ready(function(){
-        DS.sendAuthUserInfo(userInfo, wx15f7fb74b6f16e17);
+        DS.sendAuthUserInfo(userInfo, 'wx15f7fb74b6f16e17');
     });
 
     $.ajax({
-        url: "${serverContext}/wexin/v1/config",
+        url: "${serverContext}/weixin/v1/config",
         type: "GET" ,
         data:{
            url:location.href.split('#')[0]
