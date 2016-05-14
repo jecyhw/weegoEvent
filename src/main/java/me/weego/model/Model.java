@@ -71,11 +71,11 @@ abstract public class Model {
         return source.get(key, Document.class);
     }
 
-    static public ObjectId getObjectId(Document doc) {
+    static public String getObjectId(Document doc) {
         try {
-            return doc.getObjectId("_id");
+            return doc.getObjectId("_id").toString();
         } catch (Exception e) {
-            return  new ObjectId(doc.getString("_id"));
+            return  doc.getString("_id");
         }
     }
 }

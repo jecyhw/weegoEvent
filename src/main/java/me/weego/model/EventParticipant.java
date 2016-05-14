@@ -56,7 +56,7 @@ public class EventParticipant extends Model{
 
     @Override
     protected void document2Model(Document doc) {
-        this.id = getObjectId(doc).toString();
+        this.id = getObjectId(doc);
         this.weixin = doc.getString("weixin");
         this.date = doc.getString("date");
         this.shareWay = doc.getString("share_way");

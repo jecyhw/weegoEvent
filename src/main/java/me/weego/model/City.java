@@ -32,7 +32,7 @@ public class City extends Model{
 
     @Override
     protected void document2Model(Document doc) {
-        this.id = Model.getObjectId(doc).toString();
+        this.id = Model.getObjectId(doc);
         this.name = doc.getString("name");
     }
 

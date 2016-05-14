@@ -84,7 +84,7 @@ public class Event extends Model{
 
     @Override
     protected void document2Model(Document doc) {
-        this.id = getObjectId(doc).toString();
+        this.id = getObjectId(doc);
         this.city = new City().documentToModel(getSubDocument(doc, "city"), City.class);
         this.name = doc.getString("name");
         this.state = new State().documentToModel(getSubDocument(doc, "state"), State.class);
