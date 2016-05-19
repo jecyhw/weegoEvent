@@ -78,6 +78,20 @@ public class EventDao {
         return event;
     }
 
+    public List<EventParticipant> participants() {
+        MongoCollection<Document> coll = mongo.getCollection("event_participants");
+        final List<EventParticipant> participants = new ArrayList<EventParticipant>();
+        coll.find().forEach(new Block<Document>() {
+            public void apply(Document doc) {
+                EventParticipant participant = new EventParticipant();
+                participant.documentToModel(doc);
+                participant.getEvent().findNameById(collection);
+                participants.add(participant);
+            }
+        });
+        return participants;
+    }
+
     public ResBody join(String id, String weixin) {
         if (collection.find(eq("_id", new ObjectId(id))).first() == null) {
             return ResBody.returnFail(-1, "活动不存在");

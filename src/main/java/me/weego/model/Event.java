@@ -1,7 +1,11 @@
 package me.weego.model;
 
+import com.mongodb.client.MongoCollection;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bson.Document;
+import org.bson.types.ObjectId;
+
+import static com.mongodb.client.model.Filters.eq;
 
 /**
  * Created by ln on 16-4-22.
@@ -80,6 +84,19 @@ public class Event extends Model{
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public Event findNameById(MongoCollection<Document> collection) {
+        Document eventDoc = collection.find(eq("_id", new ObjectId(this.id))).first();
+        if (eventDoc != null) {
+            this.name = eventDoc.getString("name");
+        }
+        return this;
+    }
+
+    public Event findNameById(MongoCollection collection, String id) {
+        this.id = id;
+        return findNameById(collection);
     }
 
     @Override

@@ -19,17 +19,23 @@ public class EventController extends BaseController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView list() {
-        return eventService.list();
+        return new ModelAndView("newshare", "eventList", eventService.list());
     }
 
     @RequestMapping(value = "detail", method = RequestMethod.GET)
     public ModelAndView detail(@RequestParam String id) {
-        return eventService.detail(id);
+        return new ModelAndView("share_detail", "event", eventService.detail(id));
     }
 
     @RequestMapping(value = "join", method = RequestMethod.POST)
     @ResponseBody
     public ResBody join(@RequestParam String id, @RequestParam String weixin) {
         return eventService.join(id, weixin);
+    }
+
+    @RequestMapping(value = "participants", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView participants() {
+        return  new ModelAndView("participants", "participants", eventService.participants());
     }
 }
